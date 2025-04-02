@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="WARN" monitorInterval="30" debug="true">
+
+    <!-- Logging Properties -->
+    <Properties>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}: %m%n</Property>
+        <Property name="APP_LOG_ROOT">${sys:catalina.home}/logs</Property>
+    </Properties>
+
+    <Appenders>
+
+        <!-- Console Appender -->
+        <Console name="console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+        </Console>
+
+        <!-- File Appender -->
+        <!--<RollingFile name="rollingFile"
+                     fileName="${APP_LOG_ROOT}/spring.log"
+                     filePattern="${APP_LOG_ROOT}/spring-%d{yyyy-MM-dd}-%i.zip">-->
+
+        <RollingFile name="rollingFile"
+                     fileName="C:\Users\calm\logs\spring.log"
+                     filePattern="C:\Users\calm\logs\spring-%d{yyyy-MM-dd}-%i.zip">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="14KB" />
+            </Policies>
+            <DefaultRolloverStrategy max="50"/>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="rollingFile" />
+        </Root>
+
+        <Logger name="org.hibernate.OT" level="debug" additivity="false">
+            <AppenderRef ref="rollingFile" />
+        </Logger>
+
+    </Loggers>
+
+</Configuration>
