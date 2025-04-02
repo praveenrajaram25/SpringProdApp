@@ -20,20 +20,15 @@ public class AppController {
     @Autowired
     private SpringService springService;
 
-
-    @GetMapping("/api1")
-    public String getData(){
-        return "Hello";
-    }
-
+    
+    //Testing all the Spring Boot Features such as Env based DB Connections,Logging,PropertyFile loading.
     @GetMapping("/features/test")
     public String testDataBaseConnection(){
-
-
         return springService.testDB();
     }
 
 
+    //Make a DB insertion into both primary and seconday DB systems to check DB Management
     @PostMapping("/employee")
     public  String addEmployee(@RequestBody EmployeeData emp){
         return springService.addEmployee(emp);
